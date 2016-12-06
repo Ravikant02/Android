@@ -1,6 +1,7 @@
 package com.example.inviter.invtandroid.activity;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,6 +71,11 @@ public class SignInActivity extends AppCompatActivity {
         layoutParams.setMargins(0, bgImageHeight-(height/2), 0, 0); //(left, top, right, bottom);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         imgTop.setLayoutParams(layoutParams);*/
+
+        txtEmail.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary),
+                PorterDuff.Mode.SRC_ATOP);
+        txtPassword.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary),
+                PorterDuff.Mode.SRC_ATOP);
     }
 
     @OnClick(R.id.imgFbLogin)
