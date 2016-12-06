@@ -17,4 +17,18 @@
         <item name="colorPrimary">@android:color/transparent</item>
     </style>
 
+    <style name="AppTheme.ActionBar.Solid.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Solid" parent="AppTheme">
+        <item name="windowActionBarOverlay">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation">0dp</item>
+        <item name="android:windowActionBar">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+
 </resources>
