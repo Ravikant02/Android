@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.SignInActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar.Transparent">
+            android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".activity.SignUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar.Transparent"/>
+            android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar"/>
         <activity android:name=".activity.OnBoarding"
             android:screenOrientation="portrait"/>
 
