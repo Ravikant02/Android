@@ -22,21 +22,48 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SignInActivity"
+        <activity
+            android:name=".activity.SignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SignUpActivity"
+        <activity
+            android:name=".activity.SignUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar"/>
-        <activity android:name=".activity.OnBoarding"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar" />
+        <activity
+            android:name=".activity.OnBoarding"
+            android:screenOrientation="portrait" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <activity
+            android:name=".activity.ThanksActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar" />
+        <activity
+            android:name=".activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar" />
+        <activity
+            android:name=".activity.CreateEventActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar.Solid.NoActionBar" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

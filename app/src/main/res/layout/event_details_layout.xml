@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgTop"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_top_homepage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutEventTitle"
+        android:layout_below="@+id/imgTop"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgDate"
+            android:src="@drawable/icon_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:text="15 Dec"
+            android:layout_alignLeft="@+id/imgDate"
+            android:layout_alignRight="@+id/imgDate"
+            android:layout_alignBottom="@+id/imgDate"
+            android:layout_alignTop="@+id/imgDate"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtMonth"
+            android:text="Event Title"
+            android:layout_toRightOf="@+id/imgDate"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutCalender"
+        android:layout_below="@+id/relativeLayoutEventTitle"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgCalender"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/icon_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtFullDate"
+            android:layout_toRightOf="@+id/imgCalender"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="15 December, 2016 at 5PM-7PM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutVenue"
+        android:layout_below="@+id/relativeLayoutCalender"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgMap"
+            android:layout_marginLeft="8dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtVenue"
+            android:layout_toRightOf="@+id/imgMap"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="55 East 52nd Street \n 21st Floor \n New York, NY 10022"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/relativeLayoutVenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ProgressBar
+            android:id="@+id/circularProgressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:indeterminate="false"
+            android:layout_centerInParent="true"
+            android:progressDrawable="@drawable/circular" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:text="25"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

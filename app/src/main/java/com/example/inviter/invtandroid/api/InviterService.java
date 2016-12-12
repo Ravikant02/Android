@@ -1,6 +1,10 @@
 package com.example.inviter.invtandroid.api;
 
+import com.example.inviter.invtandroid.api.response.encodevideo.EncodeVideoResponseJSON;
+import com.example.inviter.invtandroid.api.response.encodevideojob.EncodeJobResponseJSON;
+import com.example.inviter.invtandroid.api.signin.SignInResponse;
 import com.example.inviter.invtandroid.api.signup.SignUpBody;
+import com.example.inviter.invtandroid.api.uploadResponse.UploadResponse;
 import com.example.inviter.invtandroid.api.userid.UserId;
 
 import retrofit.Callback;
@@ -29,13 +33,40 @@ public interface InviterService {
     @GET("/user/getuserid/")
     void getUserId(@Path("email") String emailID, Callback<UserId> callback);
 
-    //@FormUrlEncoded
-    /*@Multipart
+    @Multipart
+    @POST("/forgotpassword")
+    void forgotPassword(@Part("emailID") String emailID, Callback<CheckEmailResponse> callback);
+
+    @Multipart
+    @POST("/signin/doSignIn")
+    void signIn(@Part("emailID") String emailID,
+                        @Part("password") String password,
+                        Callback<SignInResponse> callback);
+
+    @Multipart
+    @POST("/user/{userID}/encode")
+    void encodeVideo(@Path("userID") String userID,
+                            @Part("filePath") String filePath,
+                            @Part("s3FilePath") String s3FilePath,
+                            @Part("baseURL") String baseURL,
+                            @Part("fileType") String fileType,
+                            @Part("serverIp") String serverIp,
+                            @Part("length") String length,
+                            Callback<EncodeVideoResponseJSON> callback);
+
+    @GET("/user/{userID}/encode")
+    void getEncodeJobStatus(@Path("userID") String userID,
+                                   @Query("jobID") String jobID,
+                                   Callback<EncodeJobResponseJSON> callback);
+    @Multipart
     @POST("/user/{userID}/upload/")
     void upload(@Path("userID") String userID,
                 @Part("uploadType") String uploadType,
                 @Part("file") TypedFile typedFile,
                 Callback<UploadResponse> callback);
+
+    //@FormUrlEncoded
+    /*
     @Multipart
     @POST("/user/{userID}/events")
     public void createEvent(@Path("userID") String userID,
@@ -69,21 +100,7 @@ public interface InviterService {
                             @Part("eventID") String eventID,
                             Callback<EventResponse> callback);
 
-    @Multipart
-    @POST("/user/{userID}/encode")
-    public void encodeVideo(@Path("userID") String userID,
-                            @Part("filePath") String filePath,
-                            @Part("s3FilePath") String s3FilePath,
-                            @Part("baseURL") String baseURL,
-                            @Part("fileType") String fileType,
-                            @Part("serverIp") String serverIp,
-                            @Part("length") String length,
-                            Callback<EncodeVideoResponseJSON> callback);
 
-    @GET("/user/{userID}/encode")
-    public void getEncodeJobStatus(@Path("userID") String userID,
-                                   @Query("jobID") String jobID,
-                                   Callback<EncodeJobResponseJSON> callback);
     @Multipart
     @POST("/user/{userID}/utcdate")
     public void validateUTCDate(@Path("userID") String userID,

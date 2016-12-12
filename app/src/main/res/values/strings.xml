@@ -3,4 +3,13 @@
     <string name="app_id">1403632433227528</string>
 
     <string name="please_wait">Please wait...</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="thank_you_info">Thank you to choose Inviter. Please verify your email id sent to your register email id then click done below to continue.</string>
+    <string name="forgot_info">We just need your register email id to send you a link to reset your password</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

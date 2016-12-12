@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/dialog_custom_border"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgTop"
+        android:src="@drawable/bg_app"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtThankYou"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_below="@+id/imgTop"
+        android:textSize="18sp"
+        android:textColor="@color/bgBlue"
+        android:layout_marginTop="5dp"
+        android:text="@string/thank_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thank_you_info"
+        android:textAlignment="center"
+        android:textColor="@color/text_color"
+        android:layout_below="@+id/txtThankYou"
+        android:layout_marginTop="5dp"
+        android:id="@+id/txtThankYouInfo"
+        android:padding="5dp"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:background="@drawable/button_border_bg_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txtThankYouInfo"
+        android:layout_marginTop="5dp"
+        android:text="Log In"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

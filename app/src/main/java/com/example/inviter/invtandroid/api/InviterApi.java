@@ -1,10 +1,15 @@
 package com.example.inviter.invtandroid.api;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.BuildConfig;
 import android.util.Log;
 
+import com.example.inviter.invtandroid.api.response.encodevideo.EncodeVideoResponseJSON;
+import com.example.inviter.invtandroid.api.response.encodevideojob.EncodeJobResponseJSON;
+import com.example.inviter.invtandroid.api.signin.SignInResponse;
 import com.example.inviter.invtandroid.api.signup.SignUpBody;
+import com.example.inviter.invtandroid.api.uploadResponse.UploadResponse;
 import com.example.inviter.invtandroid.api.userid.UserId;
 import com.example.inviter.invtandroid.config.AppConfig;
 import com.google.gson.Gson;
@@ -24,42 +29,46 @@ public class InviterApi {
 
     private static InviterApi inviterApi = new InviterApi();
     public static InviterService inviterService;
+    private Context context;
+
+    public InviterApi(){
+
+    }
+
+    public InviterApi(Context context){
+        this.context = context;
+    }
 
     public static InviterApi getInstance(Context context) {
-        if (inviterApi == null)
-        {
-            inviterApi = new InviterApi();
-        }
+        if (inviterApi == null) inviterApi = new InviterApi();
         return inviterApi;
     }
 
-    /*public void uploadContent(String userID, String uploadType, TypedFile typedFile,
-                              Callback<UploadResponse>callback)
-    {
-        getServiceInstance(true, "5d96df6dc4f1299fb897f24e39d79c10", "188977722455bb0fc15ae61",
-                "xNMTSWfSJiDWYmyz").upload(userID, uploadType, typedFile, callback);
+    public void uploadContent(String userID, String uploadType, TypedFile typedFile,
+                              Callback<UploadResponse>callback) {
+        getServiceInstance().upload(userID, uploadType, typedFile, callback);
 
     }
     
-    public void createEvent(CreateEventJSON createEventJSON, Callback<EventResponse> response)
+    /*public void createEvent(CreateEventJSON createEventJSON, Callback<EventResponse> response)
     {
         Log.i("Test", "Create event JSON " + new Gson().toJson(createEventJSON));
         getServiceInstance(true, "266a9e17525a90988817ada12e941272", "1559395096546d750793089",
                 "bOx9wOUjIW9U81U2").createEvent("2838023a778dfaecdc212708f721b788", createEventJSON, "", "create", false, response);
-    }
+    }*/
 
     public void encodeVideo(String userID, String filPath, String s3FilePath, String baseURL,
                             String fileType, String serverIP, String length,
                             Callback<EncodeVideoResponseJSON> callback)
     {
-        getInviterService().encodeVideo(userID, filPath, s3FilePath, baseURL, fileType,
+        getServiceInstance().encodeVideo(userID, filPath, s3FilePath, baseURL, fileType,
                 serverIP, length, callback);
     }
 
     public void getEncodeStatus(String userID, String jobID, Callback<EncodeJobResponseJSON>callback){
-        getInviterService().getEncodeJobStatus(userID, jobID, callback);
+        getServiceInstance().getEncodeJobStatus(userID, jobID, callback);
     }
-
+    /*
     public void saveEvent(CreateEventJSON createEventJSON, Callback<EventResponse> response)
     {
         Log.i("Test", "Save event JSON " + new Gson().toJson(createEventJSON));
@@ -104,11 +113,20 @@ public class InviterApi {
         getServiceInstance().getUserId(emailId, callback);
     }
 
+    public void forgotPassword(String emailId, Callback<CheckEmailResponse>callback){
+        getServiceInstance().forgotPassword(emailId, callback);
+    }
 
-    public static InviterService getServiceInstance(final String appID,
+    public void singIn(String emailId, String password, Callback<SignInResponse>callback){
+        getServiceInstance().signIn(emailId, password, callback);
+    }
+
+
+    public InviterService getServiceInstance(final String appID,
                                                     final String appSecret,
-                                                    final String accessToken)
-    {
+                                                    final String accessToken) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyHome", Context.MODE_PRIVATE);
         if (inviterService == null)
         {
             OkHttpClient client = new OkHttpClient();
