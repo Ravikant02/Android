@@ -8,4 +8,8 @@
     <color name="bgRed"> #FF0057</color>
     <color name="bgBlue">#2CBFC3</color>
     <color name="text_color">#383E42</color>
+    <color name="rsvp_yes">#0ACF0A</color>
+    <color name="rsvp_no">#FF0057</color>
+    <color name="rsvp_maybe">#efd719</color>
+    <color name="progress_color">#E8E8E8</color>
 </resources>

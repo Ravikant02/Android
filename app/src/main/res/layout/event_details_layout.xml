@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:background="@drawable/dialog_custom_border"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgTop"
@@ -9,6 +11,36 @@
         android:src="@drawable/bg_top_homepage"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
+
+    <ImageView
+        android:id="@+id/imgPlay"
+        android:src="@drawable/icon_play"
+        android:layout_marginLeft="15dp"
+        android:layout_alignBottom="@+id/imgTop"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imgShare"
+        android:src="@drawable/icon_share"
+        android:layout_alignBottom="@+id/imgTop"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtVideoDuration"
+        android:layout_toRightOf="@+id/imgPlay"
+        android:layout_alignBottom="@+id/imgTop"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="10dp"
+        android:text="01:50"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/relativeLayoutEventTitle"
@@ -24,6 +56,7 @@
 
         <TextView
             android:id="@+id/txtDate"
+            android:textColor="@color/text_color"
             android:text="15 Dec"
             android:layout_alignLeft="@+id/imgDate"
             android:layout_alignRight="@+id/imgDate"
@@ -35,85 +68,261 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/txtMonth"
+            android:id="@+id/txtEventTitle"
             android:text="Event Title"
             android:layout_toRightOf="@+id/imgDate"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/text_color"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
-
     <RelativeLayout
-        android:id="@+id/relativeLayoutCalender"
+        android:id="@+id/relativeLayoutEventDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayoutEventTitle"
-        android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imgCalender"
-            android:layout_marginLeft="8dp"
-            android:src="@drawable/icon_calendar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutCalender"
+            android:padding="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgCalender"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/icon_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/txtFullDate"
-            android:layout_toRightOf="@+id/imgCalender"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            android:text="15 December, 2016 at 5PM-7PM"
+            <TextView
+                android:id="@+id/txtFullDate"
+                android:layout_toRightOf="@+id/imgCalender"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:text="15 December, 2016 at 5PM-7PM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutVenue"
+            android:layout_below="@+id/relativeLayoutCalender"
+            android:padding="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgMap"
+                android:layout_marginLeft="8dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayoutVenue"
-        android:layout_below="@+id/relativeLayoutCalender"
-        android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imgMap"
-            android:layout_marginLeft="8dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/icon_map"
+            <TextView
+                android:id="@+id/txtVenue"
+                android:layout_toRightOf="@+id/imgMap"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:text="55 East 52nd Street \n 21st Floor \n New York, NY 10022"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <!--<RelativeLayout
+            android:layout_below="@+id/relativeLayoutVenue"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/circularProgressRsvpYes"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:progress="60"
+                android:secondaryProgress="100"
+                android:indeterminate="false"
+                android:layout_alignParentLeft="true"
+                android:progressDrawable="@drawable/circular_rsvp_yes" />
 
-        <TextView
-            android:id="@+id/txtVenue"
-            android:layout_toRightOf="@+id/imgMap"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            android:text="55 East 52nd Street \n 21st Floor \n New York, NY 10022"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            <ProgressBar
+                android:id="@+id/circularProgressRsvpMayBe"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:secondaryProgress="100"
+                android:progress="20"
+                android:indeterminate="false"
+                android:layout_alignParentRight="true"
+                android:progressDrawable="@drawable/circular_rsvp_maybe" />
 
-    <RelativeLayout
-        android:layout_below="@+id/relativeLayoutVenue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ProgressBar
-            android:id="@+id/circularProgressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:indeterminate="false"
-            android:layout_centerInParent="true"
-            android:progressDrawable="@drawable/circular" />
+            <TextView
+                android:id="@+id/txtRsvpMayBe"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:text="25"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:gravity="center"
-            android:text="25"
-            android:layout_centerInParent="true"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txtRsvpNo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:text="25"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/circularProgressRsvpYes"
+                android:layout_toEndOf="@+id/circularProgressRsvpYes"
+                android:layout_marginLeft="27dp"
+                android:layout_marginStart="27dp" />
+
+            <ProgressBar
+                android:id="@+id/circularProgressRsvpNo"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/circular_rsvp_no"
+                android:progress="20"
+                android:secondaryProgress="100"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/txtRsvpNo"
+                android:layout_alignStart="@+id/txtRsvpNo" />
+
+            <TextView
+                android:id="@+id/txtRsvpYes"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:text="25"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>-->
+
+        <LinearLayout
+            android:layout_below="@+id/relativeLayoutVenue"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+            <RelativeLayout
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ProgressBar
+                    android:id="@+id/circularProgressRsvpYes"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:progress="60"
+                    android:secondaryProgress="100"
+                    android:indeterminate="false"
+                    android:layout_alignParentLeft="true"
+                    android:progressDrawable="@drawable/circular_rsvp_yes" />
+                <TextView
+                    android:id="@+id/txtRsvpYes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="25"
+                    android:textColor="@color/text_color"
+                    android:textSize="14sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:textColor="@color/text_color"
+                    android:text="Attending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="36dp"
+                    android:id="@+id/textView2"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ProgressBar
+                    android:id="@+id/circularProgressRsvpNo"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="false"
+                    android:progressDrawable="@drawable/circular_rsvp_no"
+                    android:progress="20"
+                    android:secondaryProgress="100"
+                    android:layout_alignParentTop="true" />
+                <TextView
+                    android:id="@+id/txtRsvpNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="25"
+                    android:textColor="@color/text_color"
+                    android:textSize="14sp"
+                    android:layout_alignParentTop="true" />
+
+                <TextView
+                    android:textColor="@color/text_color"
+                    android:text="Not Attending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ProgressBar
+                    android:id="@+id/circularProgressRsvpMayBe"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:secondaryProgress="100"
+                    android:progress="20"
+                    android:indeterminate="false"
+                    android:layout_alignParentRight="true"
+                    android:progressDrawable="@drawable/circular_rsvp_maybe" />
+                <TextView
+                    android:id="@+id/txtRsvpMayBe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="25"
+                    android:textColor="@color/text_color"
+                    android:textSize="14sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+                <TextView
+                    android:textColor="@color/text_color"
+                    android:text="Would Attend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 
 

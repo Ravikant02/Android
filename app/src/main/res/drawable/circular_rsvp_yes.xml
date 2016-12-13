@@ -9,9 +9,9 @@
             android:useLevel="true">
 
             <gradient
-                android:centerColor="#999999"
-                android:endColor="#999999"
-                android:startColor="#999999"
+                android:centerColor="@color/progress_color"
+                android:endColor="@color/progress_color"
+                android:startColor="@color/progress_color"
                 android:type="sweep" />
         </shape>
     </item>
@@ -33,9 +33,9 @@
                     android:pivotY="50%"
                     android:toDegrees="360" />
                 <gradient
-                    android:centerColor="#00FF00"
-                    android:endColor="#00FF00"
-                    android:startColor="#00FF00"
+                    android:centerColor="@color/rsvp_yes"
+                    android:endColor="@color/rsvp_yes"
+                    android:startColor="@color/rsvp_yes"
                     android:type="sweep" />
 
             </shape>

@@ -3,9 +3,6 @@ package com.example.inviter.invtandroid.activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -43,8 +40,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        Drawable drawable = getResources().getDrawable(R.drawable.circular);
-        final ProgressBar mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+       /* Drawable drawable = getResources().getDrawable(R.drawable.circular_rsvp_yes);
+        final ProgressBar mProgress = (ProgressBar) findViewById(R.id.circularProgressRsvpYes);
         //mProgress.setProgress(0);   // Main Progress
         mProgress.setSecondaryProgress(100); // Secondary Progress
         mProgress.setMax(100); // Maximum Progress
@@ -54,8 +51,8 @@ public class MainActivity extends AppCompatActivity
         int yesGuest = 36;
         int rsvpYes = (yesGuest * 100) / totalGuest;
         mProgress.setProgress(rsvpYes);
-        tv = (TextView) findViewById(R.id.tv);
-        tv.setText(rsvpYes+"");
+        tv = (TextView) findViewById(R.id.txtThankYou);
+        tv.setText(rsvpYes+"");*/
         /*new Thread(new Runnable() {
 
             @Override

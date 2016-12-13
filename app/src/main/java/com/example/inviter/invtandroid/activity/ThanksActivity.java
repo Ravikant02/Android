@@ -12,7 +12,7 @@ public class ThanksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thanks);
+        setContentView(R.layout.event_details_layout);
         ButterKnife.bind(this);
     }
 }
