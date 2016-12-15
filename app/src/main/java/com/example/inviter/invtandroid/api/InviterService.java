@@ -5,6 +5,7 @@ import com.example.inviter.invtandroid.api.response.encodevideojob.EncodeJobResp
 import com.example.inviter.invtandroid.api.signin.SignInResponse;
 import com.example.inviter.invtandroid.api.signup.SignUpBody;
 import com.example.inviter.invtandroid.api.uploadResponse.UploadResponse;
+import com.example.inviter.invtandroid.api.userdetails.UserDetails;
 import com.example.inviter.invtandroid.api.userid.UserId;
 
 import retrofit.Callback;
@@ -65,6 +66,9 @@ public interface InviterService {
                 @Part("file") TypedFile typedFile,
                 Callback<UploadResponse> callback);
 
+    @GET("/user/getuserdata/{userID}")
+    public void getUserData(@Path("userID") String userID, Callback<UserDetails> callback);
+
     //@FormUrlEncoded
     /*
     @Multipart
@@ -119,7 +123,6 @@ public interface InviterService {
     @GET("/user/{userID}/events")
     public void getEvents(@Path("userID") String userID, @Query("eventRequestType") String eventRequestType, @Query("intStartLimit") String startLimit, @Query("intEndLimit") String offset, Callback<EventsResponseJSON> callback);
 
-    @GET("/user/getuserdata/{userID}")
-    public void getUserData(@Path("userID") String userID, Callback<UserResponseJSON> userResponseJSONCallback);*/
+    */
 
 }

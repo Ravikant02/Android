@@ -1,9 +1,12 @@
 package com.example.inviter.invtandroid.core;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.inviter.invtandroid.activity.SignUpActivity;
 
 /**
  * Created by Ravikant on 06/12/16.
@@ -19,13 +22,15 @@ public class InviterCore {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
-    public static void longSnackbarBuilder(View view){
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+    public static void longSnackbarBuilder(Context context, String message){
+        View view = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 
-    public static void shortSnackbarBuilder(View view){
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+    public static void shortSnackbarBuilder(Context context, String message){
+        View view = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
     }
 
