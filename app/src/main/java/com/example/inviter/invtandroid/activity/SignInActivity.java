@@ -2,6 +2,7 @@ package com.example.inviter.invtandroid.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
     private MessageProgressDialog progressDialog;
     private String emailId, password;
     private String authenticationType;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,7 @@ public class SignInActivity extends AppCompatActivity {
     private void init(){
         ButterKnife.bind(this);
         progressDialog = new MessageProgressDialog(this);
+        sharedPreferences = getSharedPreferences(AppConfig.SHARED_PREFERENCE_NAME, 0);
         txtEmail.getBackground().setColorFilter(getResources().getColor(R.color.bgBlue),
                 PorterDuff.Mode.SRC_ATOP);
         txtPassword.getBackground().setColorFilter(getResources().getColor(R.color.bgBlue),
@@ -147,7 +150,13 @@ public class SignInActivity extends AppCompatActivity {
                 @Override
                 public void success(SignInResponse signInResponse, Response response) {
                     if(signInResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
-                        // TODO render dashboard
+                        sharedPreferences
+                                .edit()
+                                .putString(AppConfig.SHARED_PREFERENCE_KEY_EMAILID, emailId)
+                                .putString(AppConfig.SHARED_PREFERENCE_KEY_USER_ID, signInResponse.getData().getUserID())
+                                .apply();
+                        finish();
+                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
                     }
                 }
 

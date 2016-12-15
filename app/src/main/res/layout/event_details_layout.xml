@@ -8,9 +8,10 @@
     <ImageView
         android:id="@+id/imgTop"
         android:scaleType="fitXY"
+        android:background="@drawable/event_video_thumb_custom_border"
         android:src="@drawable/bg_top_homepage"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="180dp" />
 
     <ImageView
         android:id="@+id/imgPlay"
@@ -216,7 +217,7 @@
             android:layout_below="@+id/relativeLayoutVenue"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="180dp">
+            android:layout_height="160dp">
             <RelativeLayout
                 android:layout_weight="3"
                 android:layout_width="match_parent"

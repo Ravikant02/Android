@@ -1,7 +1,7 @@
 package com.example.inviter.invtandroid.adapters;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.inviter.invtandroid.R;
 import com.example.inviter.invtandroid.api.response.eventslibrary.UserEvent;
+import com.example.inviter.invtandroid.core.InviterCore;
 
 import java.util.List;
 
@@ -33,12 +34,12 @@ public class EventsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return this.events.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return this.events.get(i);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class EventsAdapter extends BaseAdapter {
             viewHolder.imgVideoThumb = (ImageView) view.findViewById(R.id.imgTop);
             viewHolder.progressBarRsvpYes = (ProgressBar) view.findViewById(R.id.circularProgressRsvpYes);
             viewHolder.progressBarRsvpNo = (ProgressBar) view.findViewById(R.id.circularProgressRsvpNo);
-            viewHolder.progressBarRsvpNo = (ProgressBar) view.findViewById(R.id.circularProgressRsvpMayBe);
+            viewHolder.progressBarRsvpMayBe = (ProgressBar) view.findViewById(R.id.circularProgressRsvpMayBe);
             viewHolder.relativeLayoutEventDetails = (RelativeLayout) view.findViewById(R.id.relativeLayoutEventDetails);
             view.setTag(viewHolder);
         }
@@ -74,26 +75,37 @@ public class EventsAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)view.getTag();
         }
 
-        UserEvent event = events.get(i);
+        final UserEvent event = events.get(i);
         if (event==null) return null;
 
-        if (event.eventInfo.eventType.equalsIgnoreCase("0")) viewHolder.relativeLayoutEventDetails.setVisibility(View.GONE);
-        viewHolder.txtEventTitle.setText(event.eventInfo.eventTitle);
-        viewHolder.txtEventVenue.setText(event.eventInfo.eventVenue);
-        viewHolder.txtEventDate.setText(event.eventInfo.eventStartDate);
-        viewHolder.txtRsvpYes.setText(event.rsvpCount.yes+"");
-        viewHolder.txtRsvpNo.setText(event.rsvpCount.no+"");
-        viewHolder.txtRsvpMaybe.setText(event.rsvpCount.mayBe+"");
-        viewHolder.txtVidoDuration.setText(event.eventInfo.eventVenue);
-        viewHolder.txtEventFullDate.setText(event.eventInfo.eventVenue);
+        if (event.getEventInfo().getEventType().equalsIgnoreCase("0")) viewHolder.relativeLayoutEventDetails.setVisibility(View.GONE);
+        viewHolder.txtEventTitle.setText(event.getEventInfo().getEventTitle());
+        viewHolder.txtEventVenue.setText(event.getEventInfo().getEventVenue());
+        viewHolder.txtEventDate.setText(InviterCore.getShortDate(event.getEventInfo().getEventStartDate()));
+        viewHolder.txtRsvpYes.setText(event.getRsvpCount().getYes()+"");
+        viewHolder.txtRsvpNo.setText(event.getRsvpCount().getNo()+"");
+        viewHolder.txtRsvpMaybe.setText(event.getRsvpCount().getMayBe()+"");
+        viewHolder.txtVidoDuration.setText(event.getEventInfo().getEventVideoLength());
+        // viewHolder.txtEventFullDate.setText(event.getEventInfo().getEventStartDate()+","+event.getEventInfo().getEventStartTime());
+        viewHolder.txtEventFullDate.setText(event.getEventInfo().getEventStartDate()+", "+ InviterCore.getTimeWithString(event.getEventInfo().getEventStartTime()));
 
-        int rsvpYesGuests = (event.rsvpCount.yes * 100) / event.rsvpCount.totalGuests;
-        int rsvpNoGuests = (event.rsvpCount.no * 100) / event.rsvpCount.totalGuests;
-        int rsvpMaybeGuests = (event.rsvpCount.mayBe * 100) / event.rsvpCount.totalGuests;
+        int rsvpYesGuests = (event.getRsvpCount().getYes() * 100) / event.getRsvpCount().getTotalGuests();
+        int rsvpNoGuests = (event.getRsvpCount().getNo() * 100) / event.getRsvpCount().getTotalGuests();
+        int rsvpMaybeGuests = (event.getRsvpCount().getMayBe() * 100) / event.getRsvpCount().getTotalGuests();
 
         viewHolder.progressBarRsvpYes.setProgress(rsvpYesGuests);
         viewHolder.progressBarRsvpNo.setProgress(rsvpNoGuests);
         viewHolder.progressBarRsvpMayBe.setProgress(rsvpMaybeGuests);
+        viewHolder.imgShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, event.getEventInfo().getShareURL());
+                sendIntent.setType("text/plain");
+                context.startActivity(sendIntent);
+            }
+        });
         // viewHolder.title.setTag(categories.get(position).getType());
 
         return view;

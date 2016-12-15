@@ -1,20 +1,33 @@
 
 package com.example.inviter.invtandroid.api.response.eventslibrary;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Data {
 
     @SerializedName("userEvents")
     @Expose
-    public List<UserEvent> userEvents = new ArrayList<UserEvent>();
+    private List<UserEvent> userEvents = null;
     @SerializedName("eventsCount")
     @Expose
-    public Integer eventsCount;
+    private Integer eventsCount;
+
+    public List<UserEvent> getUserEvents() {
+        return userEvents;
+    }
+
+    public void setUserEvents(List<UserEvent> userEvents) {
+        this.userEvents = userEvents;
+    }
+
+    public Integer getEventsCount() {
+        return eventsCount;
+    }
+
+    public void setEventsCount(Integer eventsCount) {
+        this.eventsCount = eventsCount;
+    }
 
 }

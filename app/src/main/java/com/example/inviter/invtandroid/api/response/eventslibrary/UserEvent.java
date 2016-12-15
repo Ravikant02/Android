@@ -4,20 +4,51 @@ package com.example.inviter.invtandroid.api.response.eventslibrary;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
 public class UserEvent {
 
     @SerializedName("eventInfo")
     @Expose
-    public EventInfo eventInfo;
+    private EventInfo eventInfo;
     @SerializedName("rsvpCount")
     @Expose
-    public RsvpCount rsvpCount;
+    private RsvpCount rsvpCount;
     @SerializedName("socialCount")
     @Expose
-    public String socialCount;
+    private String socialCount;
     @SerializedName("guestList")
     @Expose
-    public String guestList;
+    private String guestList;
+
+    public EventInfo getEventInfo() {
+        return eventInfo;
+    }
+
+    public void setEventInfo(EventInfo eventInfo) {
+        this.eventInfo = eventInfo;
+    }
+
+    public RsvpCount getRsvpCount() {
+        return rsvpCount;
+    }
+
+    public void setRsvpCount(RsvpCount rsvpCount) {
+        this.rsvpCount = rsvpCount;
+    }
+
+    public String getSocialCount() {
+        return socialCount;
+    }
+
+    public void setSocialCount(String socialCount) {
+        this.socialCount = socialCount;
+    }
+
+    public String getGuestList() {
+        return guestList;
+    }
+
+    public void setGuestList(String guestList) {
+        this.guestList = guestList;
+    }
 
 }

@@ -4,6 +4,15 @@ package com.example.inviter.invtandroid.config;
  * Created by Ravikant on 06/12/16.
  */
 public class AppConfig {
+
+    // SHARED PREFERENCE RELATED
+    public static final String SHARED_PREFERENCE_NAME = "INVITER";
+    public static final String SHARED_PREFERENCE_KEY_USER_ID = "userID";
+    public static final String SHARED_PREFERENCE_KEY_EMAILID = "emailID";
+    public static final String SHARED_PREFERENCE_KEY_ACCESS_TOKEN = "accessToken";
+    public static final String SHARED_PREFERENCE_KEY_APP_SECRET = "appSecret";
+    public static final String SHARED_PREFERENCE_KEY_APP_ID = "appID";
+
     public static final String BASE_URL = "https://testing.inviter.com/api/";
     public static final String HOST_URL = "https://testing.inviter.com/";
     public static final String AppId = "appID";

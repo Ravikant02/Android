@@ -1,197 +1,715 @@
 
 package com.example.inviter.invtandroid.api.response.eventslibrary;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 
 public class EventInfo {
 
     @SerializedName("userID")
     @Expose
-    public String userID;
+    private String userID;
     @SerializedName("eventID")
     @Expose
-    public String eventID;
+    private String eventID;
     @SerializedName("isPublicEvent")
     @Expose
-    public String isPublicEvent;
+    private String isPublicEvent;
     @SerializedName("enableRSVP")
     @Expose
-    public String enableRSVP;
+    private String enableRSVP;
     @SerializedName("isPastEvent")
     @Expose
-    public Boolean isPastEvent;
+    private Boolean isPastEvent;
     @SerializedName("scheduledOption")
     @Expose
-    public String scheduledOption;
+    private String scheduledOption;
     @SerializedName("eventEndDate")
     @Expose
-    public String eventEndDate;
+    private String eventEndDate;
     @SerializedName("eventEndTime")
     @Expose
-    public String eventEndTime;
+    private String eventEndTime;
     @SerializedName("eventJobDefinitionID")
     @Expose
-    public String eventJobDefinitionID;
+    private String eventJobDefinitionID;
     @SerializedName("eventJobRequestID")
     @Expose
-    public String eventJobRequestID;
+    private String eventJobRequestID;
     @SerializedName("eventScheduledDate")
     @Expose
-    public String eventScheduledDate;
+    private String eventScheduledDate;
     @SerializedName("eventScheduledTime")
     @Expose
-    public String eventScheduledTime;
+    private String eventScheduledTime;
     @SerializedName("eventStartDate")
     @Expose
-    public String eventStartDate;
+    private String eventStartDate;
     @SerializedName("eventStartTime")
     @Expose
-    public String eventStartTime;
+    private String eventStartTime;
     @SerializedName("Browser")
     @Expose
-    public String Browser;
+    private String browser;
     @SerializedName("eventCategory")
     @Expose
-    public String eventCategory;
+    private String eventCategory;
     @SerializedName("eventDescription")
     @Expose
-    public String eventDescription;
+    private String eventDescription;
     @SerializedName("appType")
     @Expose
-    public String appType;
+    private String appType;
     @SerializedName("eventGuestThemeURL")
     @Expose
-    public String eventGuestThemeURL;
+    private String eventGuestThemeURL;
     @SerializedName("eventHostEmail")
     @Expose
-    public String eventHostEmail;
+    private String eventHostEmail;
     @SerializedName("eventHostName")
     @Expose
-    public String eventHostName;
+    private String eventHostName;
     @SerializedName("eventHostPhone")
     @Expose
-    public String eventHostPhone;
+    private String eventHostPhone;
     @SerializedName("eventHostPhotoURL")
     @Expose
-    public String eventHostPhotoURL;
+    private String eventHostPhotoURL;
     @SerializedName("languageCode")
     @Expose
-    public String languageCode;
+    private String languageCode;
     @SerializedName("eventStatus")
     @Expose
-    public String eventStatus;
+    private String eventStatus;
     @SerializedName("eventTimezoneOffset")
     @Expose
-    public String eventTimezoneOffset;
+    private String eventTimezoneOffset;
     @SerializedName("eventTitle")
     @Expose
-    public String eventTitle;
+    private String eventTitle;
     @SerializedName("eventType")
     @Expose
-    public String eventType;
+    private String eventType;
     @SerializedName("eventVenue")
     @Expose
-    public String eventVenue;
+    private String eventVenue;
+    @SerializedName("uploadMediaType")
+    @Expose
+    private String uploadMediaType;
+    @SerializedName("invitationCards")
+    @Expose
+    private List<Object> invitationCards = null;
     @SerializedName("videoFileURL")
     @Expose
-    public String videoFileURL;
+    private String videoFileURL;
     @SerializedName("videoThumbURL")
     @Expose
-    public String videoThumbURL;
+    private String videoThumbURL;
     @SerializedName("emailThumbURL")
     @Expose
-    public String emailThumbURL;
+    private String emailThumbURL;
     @SerializedName("videoLargeThumbURL")
     @Expose
-    public String videoLargeThumbURL;
+    private String videoLargeThumbURL;
     @SerializedName("editEventURL")
     @Expose
-    public String editEventURL;
+    private String editEventURL;
     @SerializedName("previewEventURL")
     @Expose
-    public String previewEventURL;
+    private String previewEventURL;
     @SerializedName("guestURL")
     @Expose
-    public String guestURL;
+    private String guestURL;
     @SerializedName("copyEventURL")
     @Expose
-    public String copyEventURL;
+    private String copyEventURL;
     @SerializedName("addGuestsURL")
     @Expose
-    public String addGuestsURL;
+    private String addGuestsURL;
     @SerializedName("activityReportURL")
     @Expose
-    public String activityReportURL;
+    private String activityReportURL;
     @SerializedName("eventReminderURL")
     @Expose
-    public String eventReminderURL;
+    private String eventReminderURL;
     @SerializedName("upgradeGuestLimitURL")
     @Expose
-    public String upgradeGuestLimitURL;
+    private String upgradeGuestLimitURL;
     @SerializedName("RSVPEmail")
     @Expose
-    public String RSVPEmail;
+    private String rSVPEmail;
     @SerializedName("shareURL")
     @Expose
-    public String shareURL;
+    private String shareURL;
     @SerializedName("personalizedURL")
     @Expose
-    public String personalizedURL;
+    private String personalizedURL;
     @SerializedName("hashTag")
     @Expose
-    public String hashTag;
+    private String hashTag;
     @SerializedName("DBA")
     @Expose
-    public String DBA;
+    private String dBA;
     @SerializedName("isCustomEmailTemplate")
     @Expose
-    public String isCustomEmailTemplate;
+    private String isCustomEmailTemplate;
     @SerializedName("emailTemplateName")
     @Expose
-    public String emailTemplateName;
+    private String emailTemplateName;
     @SerializedName("isCustomEmailSubject")
     @Expose
-    public String isCustomEmailSubject;
+    private String isCustomEmailSubject;
     @SerializedName("emailSubject")
     @Expose
-    public String emailSubject;
+    private String emailSubject;
     @SerializedName("isCustomGuestTemplate")
     @Expose
-    public String isCustomGuestTemplate;
+    private String isCustomGuestTemplate;
     @SerializedName("guestTemplateName")
     @Expose
-    public String guestTemplateName;
+    private String guestTemplateName;
     @SerializedName("guestTemplateID")
     @Expose
-    public String guestTemplateID;
+    private String guestTemplateID;
     @SerializedName("userPaymentType")
     @Expose
-    public String userPaymentType;
+    private String userPaymentType;
     @SerializedName("eventGuestLimit")
     @Expose
-    public String eventGuestLimit;
+    private String eventGuestLimit;
     @SerializedName("eventVideoLength")
     @Expose
-    public String eventVideoLength;
+    private String eventVideoLength;
     @SerializedName("emailFromName")
     @Expose
-    public String emailFromName;
+    private String emailFromName;
     @SerializedName("RSVPByDate")
     @Expose
-    public String RSVPByDate;
+    private String rSVPByDate;
     @SerializedName("attire")
     @Expose
-    public String attire;
+    private String attire;
     @SerializedName("otherEventsCount")
     @Expose
-    public Integer otherEventsCount;
+    private Integer otherEventsCount;
     @SerializedName("groomName")
     @Expose
-    public String groomName;
+    private String groomName;
     @SerializedName("brideName")
     @Expose
-    public String brideName;
+    private String brideName;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(String eventID) {
+        this.eventID = eventID;
+    }
+
+    public String getIsPublicEvent() {
+        return isPublicEvent;
+    }
+
+    public void setIsPublicEvent(String isPublicEvent) {
+        this.isPublicEvent = isPublicEvent;
+    }
+
+    public String getEnableRSVP() {
+        return enableRSVP;
+    }
+
+    public void setEnableRSVP(String enableRSVP) {
+        this.enableRSVP = enableRSVP;
+    }
+
+    public Boolean getIsPastEvent() {
+        return isPastEvent;
+    }
+
+    public void setIsPastEvent(Boolean isPastEvent) {
+        this.isPastEvent = isPastEvent;
+    }
+
+    public String getScheduledOption() {
+        return scheduledOption;
+    }
+
+    public void setScheduledOption(String scheduledOption) {
+        this.scheduledOption = scheduledOption;
+    }
+
+    public String getEventEndDate() {
+        return eventEndDate;
+    }
+
+    public void setEventEndDate(String eventEndDate) {
+        this.eventEndDate = eventEndDate;
+    }
+
+    public String getEventEndTime() {
+        return eventEndTime;
+    }
+
+    public void setEventEndTime(String eventEndTime) {
+        this.eventEndTime = eventEndTime;
+    }
+
+    public String getEventJobDefinitionID() {
+        return eventJobDefinitionID;
+    }
+
+    public void setEventJobDefinitionID(String eventJobDefinitionID) {
+        this.eventJobDefinitionID = eventJobDefinitionID;
+    }
+
+    public String getEventJobRequestID() {
+        return eventJobRequestID;
+    }
+
+    public void setEventJobRequestID(String eventJobRequestID) {
+        this.eventJobRequestID = eventJobRequestID;
+    }
+
+    public String getEventScheduledDate() {
+        return eventScheduledDate;
+    }
+
+    public void setEventScheduledDate(String eventScheduledDate) {
+        this.eventScheduledDate = eventScheduledDate;
+    }
+
+    public String getEventScheduledTime() {
+        return eventScheduledTime;
+    }
+
+    public void setEventScheduledTime(String eventScheduledTime) {
+        this.eventScheduledTime = eventScheduledTime;
+    }
+
+    public String getEventStartDate() {
+        return eventStartDate;
+    }
+
+    public void setEventStartDate(String eventStartDate) {
+        this.eventStartDate = eventStartDate;
+    }
+
+    public String getEventStartTime() {
+        return eventStartTime;
+    }
+
+    public void setEventStartTime(String eventStartTime) {
+        this.eventStartTime = eventStartTime;
+    }
+
+    public String getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(String browser) {
+        this.browser = browser;
+    }
+
+    public String getEventCategory() {
+        return eventCategory;
+    }
+
+    public void setEventCategory(String eventCategory) {
+        this.eventCategory = eventCategory;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
+    }
+
+    public String getAppType() {
+        return appType;
+    }
+
+    public void setAppType(String appType) {
+        this.appType = appType;
+    }
+
+    public String getEventGuestThemeURL() {
+        return eventGuestThemeURL;
+    }
+
+    public void setEventGuestThemeURL(String eventGuestThemeURL) {
+        this.eventGuestThemeURL = eventGuestThemeURL;
+    }
+
+    public String getEventHostEmail() {
+        return eventHostEmail;
+    }
+
+    public void setEventHostEmail(String eventHostEmail) {
+        this.eventHostEmail = eventHostEmail;
+    }
+
+    public String getEventHostName() {
+        return eventHostName;
+    }
+
+    public void setEventHostName(String eventHostName) {
+        this.eventHostName = eventHostName;
+    }
+
+    public String getEventHostPhone() {
+        return eventHostPhone;
+    }
+
+    public void setEventHostPhone(String eventHostPhone) {
+        this.eventHostPhone = eventHostPhone;
+    }
+
+    public String getEventHostPhotoURL() {
+        return eventHostPhotoURL;
+    }
+
+    public void setEventHostPhotoURL(String eventHostPhotoURL) {
+        this.eventHostPhotoURL = eventHostPhotoURL;
+    }
+
+    public String getLanguageCode() {
+        return languageCode;
+    }
+
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
+    }
+
+    public String getEventStatus() {
+        return eventStatus;
+    }
+
+    public void setEventStatus(String eventStatus) {
+        this.eventStatus = eventStatus;
+    }
+
+    public String getEventTimezoneOffset() {
+        return eventTimezoneOffset;
+    }
+
+    public void setEventTimezoneOffset(String eventTimezoneOffset) {
+        this.eventTimezoneOffset = eventTimezoneOffset;
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public String getEventVenue() {
+        return eventVenue;
+    }
+
+    public void setEventVenue(String eventVenue) {
+        this.eventVenue = eventVenue;
+    }
+
+    public String getUploadMediaType() {
+        return uploadMediaType;
+    }
+
+    public void setUploadMediaType(String uploadMediaType) {
+        this.uploadMediaType = uploadMediaType;
+    }
+
+    public List<Object> getInvitationCards() {
+        return invitationCards;
+    }
+
+    public void setInvitationCards(List<Object> invitationCards) {
+        this.invitationCards = invitationCards;
+    }
+
+    public String getVideoFileURL() {
+        return videoFileURL;
+    }
+
+    public void setVideoFileURL(String videoFileURL) {
+        this.videoFileURL = videoFileURL;
+    }
+
+    public String getVideoThumbURL() {
+        return videoThumbURL;
+    }
+
+    public void setVideoThumbURL(String videoThumbURL) {
+        this.videoThumbURL = videoThumbURL;
+    }
+
+    public String getEmailThumbURL() {
+        return emailThumbURL;
+    }
+
+    public void setEmailThumbURL(String emailThumbURL) {
+        this.emailThumbURL = emailThumbURL;
+    }
+
+    public String getVideoLargeThumbURL() {
+        return videoLargeThumbURL;
+    }
+
+    public void setVideoLargeThumbURL(String videoLargeThumbURL) {
+        this.videoLargeThumbURL = videoLargeThumbURL;
+    }
+
+    public String getEditEventURL() {
+        return editEventURL;
+    }
+
+    public void setEditEventURL(String editEventURL) {
+        this.editEventURL = editEventURL;
+    }
+
+    public String getPreviewEventURL() {
+        return previewEventURL;
+    }
+
+    public void setPreviewEventURL(String previewEventURL) {
+        this.previewEventURL = previewEventURL;
+    }
+
+    public String getGuestURL() {
+        return guestURL;
+    }
+
+    public void setGuestURL(String guestURL) {
+        this.guestURL = guestURL;
+    }
+
+    public String getCopyEventURL() {
+        return copyEventURL;
+    }
+
+    public void setCopyEventURL(String copyEventURL) {
+        this.copyEventURL = copyEventURL;
+    }
+
+    public String getAddGuestsURL() {
+        return addGuestsURL;
+    }
+
+    public void setAddGuestsURL(String addGuestsURL) {
+        this.addGuestsURL = addGuestsURL;
+    }
+
+    public String getActivityReportURL() {
+        return activityReportURL;
+    }
+
+    public void setActivityReportURL(String activityReportURL) {
+        this.activityReportURL = activityReportURL;
+    }
+
+    public String getEventReminderURL() {
+        return eventReminderURL;
+    }
+
+    public void setEventReminderURL(String eventReminderURL) {
+        this.eventReminderURL = eventReminderURL;
+    }
+
+    public String getUpgradeGuestLimitURL() {
+        return upgradeGuestLimitURL;
+    }
+
+    public void setUpgradeGuestLimitURL(String upgradeGuestLimitURL) {
+        this.upgradeGuestLimitURL = upgradeGuestLimitURL;
+    }
+
+    public String getRSVPEmail() {
+        return rSVPEmail;
+    }
+
+    public void setRSVPEmail(String rSVPEmail) {
+        this.rSVPEmail = rSVPEmail;
+    }
+
+    public String getShareURL() {
+        return shareURL;
+    }
+
+    public void setShareURL(String shareURL) {
+        this.shareURL = shareURL;
+    }
+
+    public String getPersonalizedURL() {
+        return personalizedURL;
+    }
+
+    public void setPersonalizedURL(String personalizedURL) {
+        this.personalizedURL = personalizedURL;
+    }
+
+    public String getHashTag() {
+        return hashTag;
+    }
+
+    public void setHashTag(String hashTag) {
+        this.hashTag = hashTag;
+    }
+
+    public String getDBA() {
+        return dBA;
+    }
+
+    public void setDBA(String dBA) {
+        this.dBA = dBA;
+    }
+
+    public String getIsCustomEmailTemplate() {
+        return isCustomEmailTemplate;
+    }
+
+    public void setIsCustomEmailTemplate(String isCustomEmailTemplate) {
+        this.isCustomEmailTemplate = isCustomEmailTemplate;
+    }
+
+    public String getEmailTemplateName() {
+        return emailTemplateName;
+    }
+
+    public void setEmailTemplateName(String emailTemplateName) {
+        this.emailTemplateName = emailTemplateName;
+    }
+
+    public String getIsCustomEmailSubject() {
+        return isCustomEmailSubject;
+    }
+
+    public void setIsCustomEmailSubject(String isCustomEmailSubject) {
+        this.isCustomEmailSubject = isCustomEmailSubject;
+    }
+
+    public String getEmailSubject() {
+        return emailSubject;
+    }
+
+    public void setEmailSubject(String emailSubject) {
+        this.emailSubject = emailSubject;
+    }
+
+    public String getIsCustomGuestTemplate() {
+        return isCustomGuestTemplate;
+    }
+
+    public void setIsCustomGuestTemplate(String isCustomGuestTemplate) {
+        this.isCustomGuestTemplate = isCustomGuestTemplate;
+    }
+
+    public String getGuestTemplateName() {
+        return guestTemplateName;
+    }
+
+    public void setGuestTemplateName(String guestTemplateName) {
+        this.guestTemplateName = guestTemplateName;
+    }
+
+    public String getGuestTemplateID() {
+        return guestTemplateID;
+    }
+
+    public void setGuestTemplateID(String guestTemplateID) {
+        this.guestTemplateID = guestTemplateID;
+    }
+
+    public String getUserPaymentType() {
+        return userPaymentType;
+    }
+
+    public void setUserPaymentType(String userPaymentType) {
+        this.userPaymentType = userPaymentType;
+    }
+
+    public String getEventGuestLimit() {
+        return eventGuestLimit;
+    }
+
+    public void setEventGuestLimit(String eventGuestLimit) {
+        this.eventGuestLimit = eventGuestLimit;
+    }
+
+    public String getEventVideoLength() {
+        return eventVideoLength;
+    }
+
+    public void setEventVideoLength(String eventVideoLength) {
+        this.eventVideoLength = eventVideoLength;
+    }
+
+    public String getEmailFromName() {
+        return emailFromName;
+    }
+
+    public void setEmailFromName(String emailFromName) {
+        this.emailFromName = emailFromName;
+    }
+
+    public String getRSVPByDate() {
+        return rSVPByDate;
+    }
+
+    public void setRSVPByDate(String rSVPByDate) {
+        this.rSVPByDate = rSVPByDate;
+    }
+
+    public String getAttire() {
+        return attire;
+    }
+
+    public void setAttire(String attire) {
+        this.attire = attire;
+    }
+
+    public Integer getOtherEventsCount() {
+        return otherEventsCount;
+    }
+
+    public void setOtherEventsCount(Integer otherEventsCount) {
+        this.otherEventsCount = otherEventsCount;
+    }
+
+    public String getGroomName() {
+        return groomName;
+    }
+
+    public void setGroomName(String groomName) {
+        this.groomName = groomName;
+    }
+
+    public String getBrideName() {
+        return brideName;
+    }
+
+    public void setBrideName(String brideName) {
+        this.brideName = brideName;
+    }
 
 }
