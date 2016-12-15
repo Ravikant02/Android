@@ -1,5 +1,6 @@
 package com.example.inviter.invtandroid.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -156,6 +157,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void success(CheckEmailResponse checkEmailResponse, Response response) {
                         if (checkEmailResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
+                            progressDialog.dismissProgress();
                             InviterCore.shortToastBuilder(SignUpActivity.this, "User already exists!");
                         }else {
                             // InviterCore.shortToastBuilder(SignUpActivity.this, "Success");
@@ -188,13 +190,18 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void success(CheckEmailResponse checkEmailResponse, Response response) {
                 if (checkEmailResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
-                    // TODO code
+                    progressDialog.dismissProgress();
+                    // startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                    thankYouDialog();
+                }else{
+                    InviterCore.longSnackbarBuilder(SignUpActivity.this, checkEmailResponse.getDescription());
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 progressDialog.dismissProgress();
+                InviterCore.longSnackbarBuilder(SignUpActivity.this, error.getMessage());
             }
         });
     }

@@ -44,9 +44,11 @@
 
     <EditText
         android:id="@+id/txtPassword"
+        android:inputType="textPassword"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:hint="Password"
+        android:maxLines="1"
         android:textColor="@color/text_color"
         android:drawableLeft="@drawable/icon_password"
         android:drawablePadding="5dp"
@@ -125,6 +127,8 @@
         android:hint="Email"
         android:drawableLeft="@drawable/icon_email"
         android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:inputType="textEmailAddress"
         android:textCursorDrawable="@drawable/cursor_color"
         android:textColor="@color/text_color"
         android:layout_width="match_parent"

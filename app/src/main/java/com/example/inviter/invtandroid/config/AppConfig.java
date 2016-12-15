@@ -12,9 +12,13 @@ public class AppConfig {
     public static final String SHARED_PREFERENCE_KEY_ACCESS_TOKEN = "accessToken";
     public static final String SHARED_PREFERENCE_KEY_APP_SECRET = "appSecret";
     public static final String SHARED_PREFERENCE_KEY_APP_ID = "appID";
+    public static final String SHARED_PREFERENCE_KEY_IS_APP_FIRST_TIME = "isAppFirstTime";
+    public static final String SHARED_PREFERENCE_KEY_IS_LOGIN = "isLogin";
+    // public static final String BASE_URL = "https://testing.inviter.com/api/";
+    // public static final String HOST_URL = "https://testing.inviter.com/";
+    public static final String BASE_URL = "https://inviter.com/";
+    public static final String HOST_URL = "https://inviter.com/";
 
-    public static final String BASE_URL = "https://testing.inviter.com/api/";
-    public static final String HOST_URL = "https://testing.inviter.com/";
     public static final String AppId = "appID";
     public static final String AppSecret = "appSecret";
     public static final String AccessToken = "accessToken";

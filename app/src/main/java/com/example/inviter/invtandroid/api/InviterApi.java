@@ -10,6 +10,7 @@ import com.example.inviter.invtandroid.api.response.encodevideojob.EncodeJobResp
 import com.example.inviter.invtandroid.api.signin.SignInResponse;
 import com.example.inviter.invtandroid.api.signup.SignUpBody;
 import com.example.inviter.invtandroid.api.uploadResponse.UploadResponse;
+import com.example.inviter.invtandroid.api.userdetails.UserDetails;
 import com.example.inviter.invtandroid.api.userid.UserId;
 import com.example.inviter.invtandroid.config.AppConfig;
 import com.google.gson.Gson;
@@ -95,11 +96,11 @@ public class InviterApi {
     {
         getServiceInstance(true, "266a9e17525a90988817ada12e941272", "1559395096546d750793089",
                 "bOx9wOUjIW9U81U2").getEvents("2838023a778dfaecdc212708f721b788", eventRequestType, startLimit, offset, eventsResponseJSONCallback);
-    }
-    public void getUserData(Callback<UserResponseJSON> userResponseJSONCallback)
-    {
-        getServiceInstance(false, null, null, null).getUserData("2838023a778dfaecdc212708f721b788", userResponseJSONCallback);
     }*/
+
+    public void getUserData(String userID, Callback<UserDetails> callback) {
+        getServiceInstance().getUserData(userID, callback);
+    }
 
     public void checkMail(String emailID, Callback<CheckEmailResponse> callback){
         getServiceInstance().checkMail(emailID, callback);
@@ -113,6 +114,8 @@ public class InviterApi {
         getServiceInstance().getUserId(emailId, callback);
     }
 
+
+
     public void forgotPassword(String emailId, Callback<CheckEmailResponse>callback){
         getServiceInstance().forgotPassword(emailId, callback);
     }
@@ -122,11 +125,13 @@ public class InviterApi {
     }
 
 
-    public InviterService getServiceInstance(final String appID,
-                                                    final String appSecret,
-                                                    final String accessToken) {
+    public InviterService getServiceInstanceWithHeaders() {
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyHome", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(AppConfig.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        final String appID = sharedPreferences.getString(AppConfig.SHARED_PREFERENCE_KEY_APP_ID, "");
+        final String appSecret = sharedPreferences.getString(AppConfig.SHARED_PREFERENCE_KEY_APP_SECRET, "");
+        final String accessToken = sharedPreferences.getString(AppConfig.SHARED_PREFERENCE_KEY_ACCESS_TOKEN, "");
+
         if (inviterService == null)
         {
             OkHttpClient client = new OkHttpClient();

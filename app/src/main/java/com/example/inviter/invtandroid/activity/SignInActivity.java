@@ -1,5 +1,6 @@
 package com.example.inviter.invtandroid.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.example.inviter.invtandroid.R;
 import com.example.inviter.invtandroid.api.InviterApi;
 import com.example.inviter.invtandroid.api.signin.SignInResponse;
+import com.example.inviter.invtandroid.api.userdetails.UserDetails;
 import com.example.inviter.invtandroid.config.AppConfig;
 import com.example.inviter.invtandroid.core.InviterCore;
 import com.example.inviter.invtandroid.core.MessageProgressDialog;
@@ -50,6 +53,7 @@ public class SignInActivity extends AppCompatActivity {
     private String emailId, password;
     private String authenticationType;
     private SharedPreferences sharedPreferences;
+    private View rootView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +75,7 @@ public class SignInActivity extends AppCompatActivity {
     private void init(){
         ButterKnife.bind(this);
         progressDialog = new MessageProgressDialog(this);
+        rootView = ((Activity)SignInActivity.this).getWindow().getDecorView().findViewById(android.R.id.content);
         sharedPreferences = getSharedPreferences(AppConfig.SHARED_PREFERENCE_NAME, 0);
         txtEmail.getBackground().setColorFilter(getResources().getColor(R.color.bgBlue),
                 PorterDuff.Mode.SRC_ATOP);
@@ -146,26 +151,51 @@ public class SignInActivity extends AppCompatActivity {
     @OnClick(R.id.imgNext)
     public void onNextClick(){
         if (validateData()){
+            progressDialog.showProgress("Please wait...");
             InviterApi.getInstance(this).singIn(emailId, password, new Callback<SignInResponse>() {
                 @Override
                 public void success(SignInResponse signInResponse, Response response) {
                     if(signInResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
-                        sharedPreferences
-                                .edit()
-                                .putString(AppConfig.SHARED_PREFERENCE_KEY_EMAILID, emailId)
-                                .putString(AppConfig.SHARED_PREFERENCE_KEY_USER_ID, signInResponse.getData().getUserID())
-                                .apply();
-                        finish();
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                        getUserDetails(signInResponse.getData().getUserID());
                     }
                 }
-
                 @Override
                 public void failure(RetrofitError error) {
-
+                    progressDialog.dismissProgress();
+                    InviterCore.longSnackbarBuilder(SignInActivity.this, error.getMessage());
                 }
             });
         }
+    }
+
+    private void getUserDetails(String userID){
+        InviterApi.getInstance(this).getUserData(userID, new Callback<UserDetails>() {
+            @Override
+            public void success(UserDetails userDetails, Response response) {
+                if (userDetails.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
+                    sharedPreferences
+                            .edit()
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_USER_ID, userDetails.getData().getUserProfile().getUserID())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_EMAILID, emailId)
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_ACCESS_TOKEN, userDetails.getData().getUserAPIKeys().getAccessToken())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_APP_SECRET, userDetails.getData().getUserAPIKeys().getAppSecret())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_APP_ID, userDetails.getData().getUserAPIKeys().getAppID())
+                            .putBoolean(AppConfig.SHARED_PREFERENCE_KEY_IS_LOGIN, true)
+                            .apply();
+                    progressDialog.dismissProgress();
+                    finish();
+                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                }else{
+                    InviterCore.longSnackbarBuilder(SignInActivity.this, userDetails.getDescription());
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                progressDialog.dismissProgress();
+                InviterCore.longSnackbarBuilder(SignInActivity.this, error.getMessage());
+            }
+        });
     }
 
     @Override
