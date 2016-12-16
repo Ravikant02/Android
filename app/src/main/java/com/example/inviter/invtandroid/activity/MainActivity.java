@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
     }
     @OnClick(R.id.txtDashboard)
     public void onDashboardClick(){
-
+        startActivity(new Intent(MainActivity.this, MainActivity.class));
     }
 
     @OnClick(R.id.txtCreateEvent)

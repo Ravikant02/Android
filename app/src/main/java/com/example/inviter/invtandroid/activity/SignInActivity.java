@@ -19,6 +19,7 @@ import com.example.inviter.invtandroid.api.signin.SignInResponse;
 import com.example.inviter.invtandroid.api.userdetails.UserDetails;
 import com.example.inviter.invtandroid.config.AppConfig;
 import com.example.inviter.invtandroid.core.InviterCore;
+import com.example.inviter.invtandroid.core.Loggers;
 import com.example.inviter.invtandroid.core.MessageProgressDialog;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -32,6 +33,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -165,6 +167,7 @@ public class SignInActivity extends AppCompatActivity {
                 @Override
                 public void failure(RetrofitError error) {
                     progressDialog.dismissProgress();
+                    Loggers.error("SIGN IN===SIGN IN=="+error.getMessage());
                     InviterCore.longSnackbarBuilder(SignInActivity.this, error.getMessage());
                 }
             });
@@ -198,6 +201,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void failure(RetrofitError error) {
                 progressDialog.dismissProgress();
+                Loggers.error("SIGN IN===USER DETAILS=="+error.getMessage());
                 InviterCore.longSnackbarBuilder(SignInActivity.this, error.getMessage());
             }
         });
