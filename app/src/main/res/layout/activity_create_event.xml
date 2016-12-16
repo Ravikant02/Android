@@ -1,127 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_create_event"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.inviter.invtandroid.activity.CreateEventActivity">
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/viewA"
-            android:layout_weight="0.7"
+    <RelativeLayout
+        android:layout_weight="7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/bg_wedding"
+            android:scaleType="fitXY"
+            android:id="@+id/videoThumb"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ImageView
-                android:src="@drawable/bg_wedding"
-                android:scaleType="fitXY"
-                android:id="@+id/videoThumb"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/imgPlay"
+            android:src="@drawable/icon_play"
+            android:layout_marginLeft="15dp"
+            android:layout_alignBottom="@+id/videoThumb"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
-        <LinearLayout
+    <RelativeLayout
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layoutTitle"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:orientation="vertical"
-            android:weightSum="1">
-
-            <LinearLayout
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="24dp"
+                android:id="@+id/lblEventTitle"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="05dp"
-                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="24dp"
-                    android:id="@+id/lblEventTitle"
-                    android:layout_weight="0.9"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:id="@+id/btnEdit"
-                    android:layout_weight="0.1"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/icon_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/btnEdit"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/icon_calendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+        <ImageView
+            android:id="@+id/imgCalender"
+            android:layout_below="@+id/layoutTitle"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_below="@+id/imgCalender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <TextView
-                    android:textSize="18dp"
-                    android:id="@+id/lblEventStartDate"
-                    android:layout_marginTop="5dp"
-                    android:layout_gravity="center"
-                    android:text="@string/start_date_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="18dp"
+                android:id="@+id/lblEventStartDate"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="@string/start_date_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:layout_gravity="center"
-                    android:text="to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textSize="18dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/lblEventEndDate"
-                    android:text="@string/end_date_hint"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/txtTo"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/lblEventStartDate"
+                android:text="to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/lblEventEndDate"
+                android:text="@string/end_date_hint"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/txtTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal"
-                    android:layout_weight="0.3"
-                    android:id="@+id/fragmentLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <fragment
-                        android:id="@+id/map"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        class="com.google.android.gms.maps.MapFragment" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+    </RelativeLayout>
+</LinearLayout>

@@ -17,6 +17,18 @@ public class CheckEmailResponse {
     @SerializedName("statusCode")
     @Expose
     private Integer statusCode;
+    @SerializedName("userID")
+    @Expose
+
+    private String userID;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
     /**
      *

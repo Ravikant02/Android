@@ -1,35 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
-    android:gravity="bottom"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/menu_bg_color"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/imgUserAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/icon_user_avatar" />
 
     <TextView
+        android:id="@+id/txtUserName"
+        android:layout_below="@+id/imgUserAvatar"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:text="Hi Ravi"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Android Studio"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtDashboard"
+        android:drawableLeft="@drawable/icon_dashboard"
+        android:drawablePadding="8dp"
+        android:layout_marginTop="10dp"
+        android:text="Dashboard"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:layout_below="@id/txtUserName"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
-
-</LinearLayout>
+        android:id="@+id/txtCreateEvent"
+        android:text="Create Event"
+        android:drawableLeft="@drawable/icon_create_event"
+        android:drawablePadding="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:layout_below="@id/txtDashboard"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtTerms"
+        android:text="Terms Of Service"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:layout_below="@id/txtCreateEvent"
+        android:layout_marginLeft="33dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtPrivacyPolicy"
+        android:text="Privacy Policy"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:layout_below="@id/txtTerms"
+        android:layout_marginLeft="33dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnSignOut"
+        android:background="@color/menu_btn_color"
+        android:textColor="@android:color/white"
+        android:text="Sign Out"
+        android:textAllCaps="false"
+        android:layout_margin="10dp"
+        android:elevation="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height" />
+</RelativeLayout>

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -30,9 +31,13 @@ import android.widget.TimePicker;
 
 import com.example.inviter.invtandroid.R;
 import com.example.inviter.invtandroid.api.response.createevent.CreateEvent;
+import com.example.inviter.invtandroid.api.response.eventslibrary.EventInfo;
 import com.example.inviter.invtandroid.config.AppConfig;
+import com.example.inviter.invtandroid.core.Loggers;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -46,8 +51,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -56,7 +63,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class EventInfoActivity extends AppCompatActivity{
+public class EventInfoActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     @Bind(R.id.btnNext) ImageView btnNext;
     @Bind(R.id.txtEventTitle) EditText txteventTitle;
@@ -64,7 +71,7 @@ public class EventInfoActivity extends AppCompatActivity{
     Boolean click = true;
     int ACTIVITY_REQUEST_CODE = 1;
     public static String venue;
-    private GoogleMap googleMap;
+    private GoogleMap gMap;
     double lat= 0.0, lng= 0.0;
     LinearLayout fragmentLayout;
     public ImageView btnLocation;
@@ -84,9 +91,11 @@ public class EventInfoActivity extends AppCompatActivity{
         }
 
         btnNext.setVisibility(View.GONE);
+        txteventTitle.getBackground().setColorFilter(getResources().getColor(R.color.bgBlue),
+                PorterDuff.Mode.SRC_ATOP);
 
         createEvent = CreateEvent.getInstance();
-        if(!createEvent.getEventTitle().equals(""))
+        if(createEvent.getEventTitle()!=null)
             txteventTitle.setText(createEvent.getEventTitle());
 
         txteventTitle.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -104,12 +113,12 @@ public class EventInfoActivity extends AppCompatActivity{
                 endDate.setInputType(InputType.TYPE_NULL);
 
 
-                if (!createEvent.getEventStartDate().equals("")){
+                if (createEvent.getEventStartDate()!=null){
                     btnNext.setVisibility(View.VISIBLE);
                     startDate.setText(createEvent.getEventStartDate()+ " "
                             + createEvent.getEventStartTime());
                 }
-                if(!createEvent.getEventEndDate().equals("")){
+                if(createEvent.getEventEndDate()!=null){
                     endDate.setText(createEvent.getEventEndDate()+" "
                             +createEvent.getEventEndTime());
                 }
@@ -118,19 +127,14 @@ public class EventInfoActivity extends AppCompatActivity{
                 fragmentLayout.setVisibility(View.GONE);
 
                 try {
-                    if (googleMap == null) {
-                        /*googleMap = ((MapFragment) getFragmentManager().
-                                findFragmentById(R.id.map)).getMapAsync(new OnMapReadyCallback() {
-                            @Override
-                            public void onMapReady(GoogleMap gMap) {
-                                googleMap = gMap;
-                            }
-                        });*/
-                        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                        if (!createEvent.getEventVenue().equals("")) {
+                    if (gMap == null) {
+                        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+                        mapFragment.getMapAsync(EventInfoActivity.this);
+                        gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                        if (createEvent.getEventVenue()!=null) {
                             getLocationValues(createEvent.getEventVenue());
-                            googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13));
+                            gMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+                            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13));
                             fragmentLayout.setVisibility(View.VISIBLE);
                             btnLocation.setVisibility(View.GONE);
                         }
@@ -181,6 +185,7 @@ public class EventInfoActivity extends AppCompatActivity{
                                 EventVenuePickerActivity.class);
                         intent.putExtra("venue", venue);
                         startActivityForResult(intent, ACTIVITY_REQUEST_CODE);*/
+                        locationDialog();
                     }
                 });
 
@@ -210,8 +215,8 @@ public class EventInfoActivity extends AppCompatActivity{
         {
             venue = data.getStringExtra(venue);
             getLocationValues(venue);
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13));
+            gMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13));
             fragmentLayout.setVisibility(View.VISIBLE);
             btnLocation.setVisibility(View.GONE);
         }
@@ -230,7 +235,8 @@ public class EventInfoActivity extends AppCompatActivity{
             }
         }
         catch (Exception ex){
-            //
+            Loggers.error("MAP ERROR==="+ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
@@ -290,30 +296,23 @@ public class EventInfoActivity extends AppCompatActivity{
 
     @OnClick(R.id.btnNext)
     public void btnNextClick() {
-        /*CreateEventJSON createEventJSONObject = CreateEventJSON.getInstance();
-        createEventJSONObject.eventDetails.eventStartDate = startDate.getText().toString().trim().split(" ")[0];// startDateTime[0];
-        createEventJSONObject.eventDetails.eventStartTime = startDate.getText().toString().trim().split(" ")[1];
-        createEventJSONObject.eventDetails.eventScheduledDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        createEventJSONObject.eventDetails.eventScheduledTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
-        if (endDate.getText().toString().equals(""))
-        {
-            createEventJSONObject.eventDetails.eventEndDate = "0000-00-00";
-            createEventJSONObject.eventDetails.eventEndTime = "00:00:00";
+        CreateEvent createEvent = CreateEvent.getInstance();
+        createEvent.setEventStartDate(startDate.getText().toString().trim().split(" ")[0]);
+        createEvent.setEventStartTime(startDate.getText().toString().trim().split(" ")[1]);
+        if (endDate.getText().toString().equals("")) {
+            createEvent.setEventEndDate("0000-00-00");
+            createEvent.setEventEndTime("00:00:00");
         }
         else {
-            createEventJSONObject.eventDetails.eventEndDate = endDate.getText().toString().trim().split(" ")[0];// endDateTime[0];
-            createEventJSONObject.eventDetails.eventEndTime = endDate.getText().toString().trim().split(" ")[1];
-
+            createEvent.setEventEndDate(endDate.getText().toString().trim().split(" ")[0]);// endDateTime[0];
+            createEvent.setEventEndTime(endDate.getText().toString().trim().split(" ")[1]);
         }
-        createEventJSONObject.eventDetails.eventTitle = eventTitle.getText().toString().trim();
-        createEventJSONObject.eventDetails.eventVenue = venue;
-        //Toast.makeText(getApplicationContext(), venue, Toast.LENGTH_SHORT).show();
+        createEvent.setEventTitle(txteventTitle.getText().toString().trim());
         Intent intent = new Intent(this, CreateEventActivity.class);
-        startActivity(intent);*/
-
+        startActivity(intent);
     }
 
-    private void LocationDialog(){
+    private void locationDialog(){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.location_dialog_layout);
@@ -321,20 +320,23 @@ public class EventInfoActivity extends AppCompatActivity{
         Button btnDone = (Button) dialog.findViewById(R.id.btnDone);
         Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
         final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) dialog.findViewById(R.id.autoCompleteTextView);
-        if (!createEvent.getEventVenue().isEmpty()) autoCompleteTextView.setText(createEvent.getEventVenue());
+        autoCompleteTextView.getBackground().setColorFilter(getResources().getColor(R.color.bgBlue),
+                PorterDuff.Mode.SRC_ATOP);
+        autoCompleteTextView.setAdapter(new GooglePlacesAutocompleteAdapter(EventInfoActivity.this, R.layout.locations_list));
+        if (createEvent.getEventVenue()!=null) autoCompleteTextView.setText(createEvent.getEventVenue());
         dialog.setCancelable(false);
         dialog.show();
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                autoCompleteTextView.setAdapter(new GooglePlacesAutocompleteAdapter(EventInfoActivity.this, R.layout.locations_list));
-                autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        createEvent.setEventVenue((String) adapterView.getItemAtPosition(i));
-                    }
-                });
+                if (autoCompleteTextView.getText().toString().trim().isEmpty()) return;
+                createEvent.setEventVenue(autoCompleteTextView.getText().toString().trim());
+                getLocationValues(createEvent.getEventVenue());
+                gMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13));
+                fragmentLayout.setVisibility(View.VISIBLE);
+                btnLocation.setVisibility(View.GONE);
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -389,7 +391,12 @@ public class EventInfoActivity extends AppCompatActivity{
         return resultList;
     }
 
-    class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Filterable {
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gMap = googleMap;
+    }
+
+    private class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Filterable {
         private ArrayList resultList;
         private List<EventLocation> eventLocations;
         public GooglePlacesAutocompleteAdapter(Context context, int textViewResourceId) {
@@ -462,4 +469,5 @@ public class EventInfoActivity extends AppCompatActivity{
             this.placeID = placeID;
         }
     }
+
 }

@@ -152,11 +152,14 @@ public class SignInActivity extends AppCompatActivity {
     public void onNextClick(){
         if (validateData()){
             progressDialog.showProgress("Please wait...");
-            InviterApi.getInstance(this).singIn(emailId, password, new Callback<SignInResponse>() {
+            InviterApi.getInstance().singIn(emailId, password, new Callback<SignInResponse>() {
                 @Override
                 public void success(SignInResponse signInResponse, Response response) {
+                    progressDialog.dismissProgress();
                     if(signInResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
                         getUserDetails(signInResponse.getData().getUserID());
+                    }else{
+                        InviterCore.longToastBuilder(SignInActivity.this, signInResponse.getDescription());
                     }
                 }
                 @Override
@@ -169,7 +172,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void getUserDetails(String userID){
-        InviterApi.getInstance(this).getUserData(userID, new Callback<UserDetails>() {
+        InviterApi.getInstance().getUserData(userID, new Callback<UserDetails>() {
             @Override
             public void success(UserDetails userDetails, Response response) {
                 if (userDetails.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
@@ -177,9 +180,11 @@ public class SignInActivity extends AppCompatActivity {
                             .edit()
                             .putString(AppConfig.SHARED_PREFERENCE_KEY_USER_ID, userDetails.getData().getUserProfile().getUserID())
                             .putString(AppConfig.SHARED_PREFERENCE_KEY_EMAILID, emailId)
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_USER_NAME, userDetails.getData().getUserProfile().getFirstName()+ " "+userDetails.getData().getUserProfile().getLastName())
                             .putString(AppConfig.SHARED_PREFERENCE_KEY_ACCESS_TOKEN, userDetails.getData().getUserAPIKeys().getAccessToken())
                             .putString(AppConfig.SHARED_PREFERENCE_KEY_APP_SECRET, userDetails.getData().getUserAPIKeys().getAppSecret())
                             .putString(AppConfig.SHARED_PREFERENCE_KEY_APP_ID, userDetails.getData().getUserAPIKeys().getAppID())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_VIDEO_LENGTH, userDetails.getData().getUserPayment().getVideoLength())
                             .putBoolean(AppConfig.SHARED_PREFERENCE_KEY_IS_LOGIN, true)
                             .apply();
                     progressDialog.dismissProgress();
@@ -202,5 +207,10 @@ public class SignInActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 }

@@ -12,4 +12,6 @@
     <color name="rsvp_no">#FF0057</color>
     <color name="rsvp_maybe">#efd719</color>
     <color name="progress_color">#E8E8E8</color>
+    <color name="menu_bg_color">#383E42</color>
+    <color name="menu_btn_color">#4E4F57</color>
 </resources>
