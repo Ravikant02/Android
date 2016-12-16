@@ -37,7 +37,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             return;
         }
 
-        InviterApi.getInstance(this).forgotPassword(emailId, new Callback<CheckEmailResponse>() {
+        InviterApi.getInstance().forgotPassword(emailId, new Callback<CheckEmailResponse>() {
             @Override
             public void success(CheckEmailResponse checkEmailResponse, Response response) {
                 if (checkEmailResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){

@@ -3,7 +3,9 @@ package com.example.inviter.invtandroid.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import com.example.inviter.invtandroid.R;
 import com.example.inviter.invtandroid.api.CheckEmailResponse;
 import com.example.inviter.invtandroid.api.InviterApi;
 import com.example.inviter.invtandroid.api.signup.SignUpBody;
+import com.example.inviter.invtandroid.api.userdetails.UserDetails;
 import com.example.inviter.invtandroid.api.userid.UserId;
 import com.example.inviter.invtandroid.config.AppConfig;
 import com.example.inviter.invtandroid.core.InviterCore;
@@ -153,7 +156,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(Utils.isNetworkAvailable(this)){
             if (validateData()){
                 progressDialog.showProgress(getResources().getString(R.string.please_wait));
-                InviterApi.getInstance(this).checkMail(emailId, new Callback<CheckEmailResponse>() {
+                InviterApi.getInstance().checkMail(emailId, new Callback<CheckEmailResponse>() {
                     @Override
                     public void success(CheckEmailResponse checkEmailResponse, Response response) {
                         if (checkEmailResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
@@ -185,13 +188,17 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void signUp(SignUpBody signUpBody){
-        InviterApi.getInstance(this).signUp(signUpBody, new Callback<CheckEmailResponse>() {
+    private void signUp(final SignUpBody signUpBody){
+        InviterApi.getInstance().signUp(signUpBody, new Callback<CheckEmailResponse>() {
             @Override
             public void success(CheckEmailResponse checkEmailResponse, Response response) {
                 if (checkEmailResponse.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
-                    progressDialog.dismissProgress();
                     // startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                    if (signUpBody.getAppType().equals(AppConfig.AuthenticationType.fbLogin)){
+                        getUserDetails(checkEmailResponse.getUserID());
+                        return;
+                    }
+                    progressDialog.dismissProgress();
                     thankYouDialog();
                 }else{
                     InviterCore.longSnackbarBuilder(SignUpActivity.this, checkEmailResponse.getDescription());
@@ -206,8 +213,40 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    private void getUserDetails(String userID){
+        InviterApi.getInstance().getUserData(userID, new Callback<UserDetails>() {
+            @Override
+            public void success(UserDetails userDetails, Response response) {
+                if (userDetails.getStatus().equalsIgnoreCase(AppConfig.successResponse)){
+                    SharedPreferences sharedPreferences = getSharedPreferences(AppConfig.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+                    sharedPreferences
+                            .edit()
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_USER_ID, userDetails.getData().getUserProfile().getUserID())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_EMAILID, emailId)
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_USER_NAME, userDetails.getData().getUserProfile().getFirstName()+ " "+userDetails.getData().getUserProfile().getLastName())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_ACCESS_TOKEN, userDetails.getData().getUserAPIKeys().getAccessToken())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_APP_SECRET, userDetails.getData().getUserAPIKeys().getAppSecret())
+                            .putString(AppConfig.SHARED_PREFERENCE_KEY_APP_ID, userDetails.getData().getUserAPIKeys().getAppID())
+                            .putBoolean(AppConfig.SHARED_PREFERENCE_KEY_IS_LOGIN, true)
+                            .apply();
+                    progressDialog.dismissProgress();
+                    finish();
+                    startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                }else{
+                    InviterCore.longSnackbarBuilder(SignUpActivity.this, userDetails.getDescription());
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                progressDialog.dismissProgress();
+                InviterCore.longSnackbarBuilder(SignUpActivity.this, error.getMessage());
+            }
+        });
+    }
+
     private void getUserId(String emailId){
-        InviterApi.getInstance(this).getUserId(emailId, new Callback<UserId>() {
+        InviterApi.getInstance().getUserId(emailId, new Callback<UserId>() {
             @Override
             public void success(UserId userId, Response response) {
                 if (userId.getStatus().equalsIgnoreCase(AppConfig.successResponse)){

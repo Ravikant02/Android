@@ -1,7 +1,10 @@
 package com.example.inviter.invtandroid.api;
 
+import com.example.inviter.invtandroid.api.response.createevent.CreateEvent;
+import com.example.inviter.invtandroid.api.response.createevent.CreateEventResponse;
 import com.example.inviter.invtandroid.api.response.encodevideo.EncodeVideoResponseJSON;
 import com.example.inviter.invtandroid.api.response.encodevideojob.EncodeJobResponseJSON;
+import com.example.inviter.invtandroid.api.response.eventslibrary.EventLibrary;
 import com.example.inviter.invtandroid.api.signin.SignInResponse;
 import com.example.inviter.invtandroid.api.signup.SignUpBody;
 import com.example.inviter.invtandroid.api.uploadResponse.UploadResponse;
@@ -67,7 +70,20 @@ public interface InviterService {
                 Callback<UploadResponse> callback);
 
     @GET("/user/getuserdata/{userID}")
-    public void getUserData(@Path("userID") String userID, Callback<UserDetails> callback);
+    void getUserData(@Path("userID") String userID, Callback<UserDetails> callback);
+
+    @GET("/api/user/{userID}/events/")
+    void getEvents(@Path("userID") String userID,
+                          @Query("eventRequestType") String eventRequestType,
+                          @Query("intStartLimit") String startLimit,
+                          @Query("intEndLimit") String offset,
+                          Callback<EventLibrary> callback);
+
+    @Multipart
+    @PUT("/sapi/user/{userID}/events")
+    void createEvent(@Path("userID") String userID,
+                          @Part("JSONData")CreateEvent createEvent,
+                          Callback<CreateEventResponse> callback);
 
     //@FormUrlEncoded
     /*
@@ -80,7 +96,7 @@ public interface InviterService {
                             @Part("update") boolean canUpdate,
                             Callback<EventResponse> response);
 
-    @GET("/user/{userID}/events/{eventID}")
+    @GET("/api/user/{userID}/events/")
     public void getEvent(@Path("userID") String userID,
                          @Path("eventID") String eventID,
                          Callback<CreateEventJSONResponse> createEventJSONCallback);

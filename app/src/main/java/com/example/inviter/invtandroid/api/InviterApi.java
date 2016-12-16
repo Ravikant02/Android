@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.support.v4.BuildConfig;
 import android.util.Log;
 
+import com.example.inviter.invtandroid.api.response.createevent.CreateEvent;
+import com.example.inviter.invtandroid.api.response.createevent.CreateEventResponse;
 import com.example.inviter.invtandroid.api.response.encodevideo.EncodeVideoResponseJSON;
 import com.example.inviter.invtandroid.api.response.encodevideojob.EncodeJobResponseJSON;
+import com.example.inviter.invtandroid.api.response.eventslibrary.EventLibrary;
 import com.example.inviter.invtandroid.api.signin.SignInResponse;
 import com.example.inviter.invtandroid.api.signup.SignUpBody;
 import com.example.inviter.invtandroid.api.uploadResponse.UploadResponse;
@@ -14,6 +17,7 @@ import com.example.inviter.invtandroid.api.userdetails.UserDetails;
 import com.example.inviter.invtandroid.api.userid.UserId;
 import com.example.inviter.invtandroid.config.AppConfig;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.squareup.okhttp.OkHttpClient;
 
 import retrofit.Callback;
@@ -32,42 +36,33 @@ public class InviterApi {
     public static InviterService inviterService;
     private Context context;
 
-    public InviterApi(){
-
-    }
-
-    public InviterApi(Context context){
-        this.context = context;
-    }
-
-    public static InviterApi getInstance(Context context) {
+    public static InviterApi getInstance() {
         if (inviterApi == null) inviterApi = new InviterApi();
         return inviterApi;
     }
 
-    public void uploadContent(String userID, String uploadType, TypedFile typedFile,
+    public void uploadContent(Context con, String userID, String uploadType, TypedFile typedFile,
                               Callback<UploadResponse>callback) {
-        getServiceInstance().upload(userID, uploadType, typedFile, callback);
+        this.context = con;
+        getServiceInstanceWithHeaders().upload(userID, uploadType, typedFile, callback);
 
     }
     
-    /*public void createEvent(CreateEventJSON createEventJSON, Callback<EventResponse> response)
-    {
-        Log.i("Test", "Create event JSON " + new Gson().toJson(createEventJSON));
-        getServiceInstance(true, "266a9e17525a90988817ada12e941272", "1559395096546d750793089",
-                "bOx9wOUjIW9U81U2").createEvent("2838023a778dfaecdc212708f721b788", createEventJSON, "", "create", false, response);
-    }*/
+    public void createEvent(Context con, String userID, CreateEvent createEventJSON, Callback<CreateEventResponse> callback) {
+        getServiceInstanceWithHeaders().createEvent(userID, createEventJSON, callback);
+    }
 
-    public void encodeVideo(String userID, String filPath, String s3FilePath, String baseURL,
+    public void encodeVideo(Context con, String userID, String filPath, String s3FilePath, String baseURL,
                             String fileType, String serverIP, String length,
-                            Callback<EncodeVideoResponseJSON> callback)
-    {
-        getServiceInstance().encodeVideo(userID, filPath, s3FilePath, baseURL, fileType,
+                            Callback<EncodeVideoResponseJSON> callback) {
+        this.context = con;
+        getServiceInstanceWithHeaders().encodeVideo(userID, filPath, s3FilePath, baseURL, fileType,
                 serverIP, length, callback);
     }
 
-    public void getEncodeStatus(String userID, String jobID, Callback<EncodeJobResponseJSON>callback){
-        getServiceInstance().getEncodeJobStatus(userID, jobID, callback);
+    public void getEncodeStatus(Context con, String userID, String jobID, Callback<EncodeJobResponseJSON>callback){
+        this.context = con;
+        getServiceInstanceWithHeaders().getEncodeJobStatus(userID, jobID, callback);
     }
     /*
     public void saveEvent(CreateEventJSON createEventJSON, Callback<EventResponse> response)
@@ -90,13 +85,12 @@ public class InviterApi {
 //        Log.i("Test", "Re-Save event JSON " + new Gson().toJson(createEventJSON));
         getServiceInstance(true, "266a9e17525a90988817ada12e941272", "1559395096546d750793089",
                 "bOx9wOUjIW9U81U2").reSaveEvent("2838023a778dfaecdc212708f721b788", createEventJSON, "save", false, true, "", response);
-    }
-
-    public void getEvents(String eventRequestType, String startLimit, String offset, Callback<EventsResponseJSON> eventsResponseJSONCallback)
-    {
-        getServiceInstance(true, "266a9e17525a90988817ada12e941272", "1559395096546d750793089",
-                "bOx9wOUjIW9U81U2").getEvents("2838023a778dfaecdc212708f721b788", eventRequestType, startLimit, offset, eventsResponseJSONCallback);
     }*/
+
+    public void getEvents(Context con, String userID, String eventRequestType, String startLimit, String offset, Callback<EventLibrary> callback) {
+        this.context = con;
+        getServiceInstanceWithHeaders().getEvents(userID, eventRequestType, startLimit, offset, callback);
+    }
 
     public void getUserData(String userID, Callback<UserDetails> callback) {
         getServiceInstance().getUserData(userID, callback);
@@ -113,8 +107,6 @@ public class InviterApi {
     public void getUserId(String emailId, Callback<UserId>callback){
         getServiceInstance().getUserId(emailId, callback);
     }
-
-
 
     public void forgotPassword(String emailId, Callback<CheckEmailResponse>callback){
         getServiceInstance().forgotPassword(emailId, callback);
